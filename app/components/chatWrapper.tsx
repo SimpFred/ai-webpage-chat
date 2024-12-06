@@ -1,5 +1,6 @@
 "use client";
 import { useChat } from "ai/react";
+import { Messages } from "./messages";
 
 const ChatWrapper = ({ sessionId }: { sessionId: string }) => {
   const { messages, handleInputChange, input, handleSubmit } = useChat({
@@ -13,7 +14,7 @@ const ChatWrapper = ({ sessionId }: { sessionId: string }) => {
     flex-col justify-between gap-2"
     >
       <div className="flex-1 text-black bg-zinc-800 justify-between flex flex-col">
-        {JSON.stringify(messages)}
+        <Messages messages={messages} />
       </div>
 
       <form onSubmit={handleSubmit}>
