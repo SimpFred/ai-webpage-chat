@@ -1,6 +1,6 @@
 import ChatWrapper from "../components/chatWrapper";
-import { ragChat } from "../lib/rag-chat";
-import { redis } from "../lib/redis";
+import { ragChat } from "../../lib/rag-chat";
+import { redis } from "../../lib/redis";
 
 interface PageProps {
   params: {
@@ -18,6 +18,7 @@ function reconstructUrl({ url }: { url: string[] }) {
 const Page = async ({ params }: PageProps) => {
   const { url } = await params;
   const recounstructedUrl = reconstructUrl({ url: url as string[] });
+  console.log("recounstructedUrl", recounstructedUrl);
   const isAlreadyIndexed = await redis.sismember(
     "indexed-urls",
     recounstructedUrl
