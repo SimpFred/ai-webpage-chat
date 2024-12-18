@@ -1,13 +1,26 @@
 import { type Message as TMessage } from "ai/react";
 import { Message } from "./message";
 import { MessageSquare } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 interface MessagesProps {
   messages: TMessage[];
 }
 export const Messages = ({ messages }: MessagesProps) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
-    <div className="flex max-h-[calc(100vh-3.5rem-7rem)] flex-1 flex-col overflow-y-auto">
+    <div className="flex max-h-[calc(100vh-3.5rem-7rem)] flex-1 flex-col overflow-y-scroll">
       {messages.length ? (
         messages.map((message, index) => (
           <Message
@@ -27,6 +40,7 @@ export const Messages = ({ messages }: MessagesProps) => {
           </p>
         </div>
       )}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
