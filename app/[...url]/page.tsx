@@ -47,7 +47,7 @@ const Page = async ({ params }: PageProps) => {
     await ragChat.context.add({
       type: "html",
       source: recounstructedUrl,
-      config: { chunkOverlap: 50, chunkSize: 500 },
+      config: { chunkOverlap: 50, chunkSize: 200 },
     });
 
     const urlsToAdd = [recounstructedUrl]; // Lägg till fler URL:er om det behövs
