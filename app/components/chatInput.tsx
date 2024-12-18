@@ -13,6 +13,7 @@ interface ChatInputProps {
   handleInputChange: HandleInputChange;
   handleSubmit: HandleSubmit;
   setInput: SetInput;
+  isAnswering: boolean;
 }
 
 export const ChatInput = ({
@@ -20,6 +21,7 @@ export const ChatInput = ({
   handleInputChange,
   handleSubmit,
   setInput,
+  isAnswering,
 }: ChatInputProps) => {
   return (
     <div className="z-10 bg-zinc-900 absolute bottom-0 left-0 w-full">
@@ -30,6 +32,7 @@ export const ChatInput = ({
               <Textarea
                 minRows={4}
                 autoFocus
+                disabled={isAnswering}
                 onChange={handleInputChange}
                 value={input}
                 onKeyDown={(e) => {
@@ -39,15 +42,21 @@ export const ChatInput = ({
                     setInput("");
                   }
                 }}
-                placeholder="Enter your question..."
-                className="resize-none bg-zinc-800 hover:bg-zinc-900 rounded-xl text-base caret-slate-50"
+                placeholder={
+                  isAnswering
+                    ? "Generating response..."
+                    : "Enter your question..."
+                }
+                className="resize-none bg-zinc-800 rounded-xl text-base caret-slate-50"
               />
               <Button
                 size="sm"
+                disabled={isAnswering}
+                isLoading={isAnswering}
                 type="submit"
                 className="absolute z-10 border border-border bg-zinc-900 right-2 bottom-2"
               >
-                <Send className="size-4" />
+                {!isAnswering && <Send className="size-4" />}
               </Button>
             </form>
           </div>

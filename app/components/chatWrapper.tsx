@@ -10,12 +10,18 @@ const ChatWrapper = ({
   sessionId: string;
   initialMessages: Message[];
 }) => {
-  const { messages, handleInputChange, input, handleSubmit, setInput } =
-    useChat({
-      api: "/api/chat-stream",
-      body: { sessionId },
-      initialMessages,
-    });
+  const {
+    messages,
+    handleInputChange,
+    input,
+    handleSubmit,
+    setInput,
+    isLoading,
+  } = useChat({
+    api: "/api/chat-stream",
+    body: { sessionId },
+    initialMessages,
+  });
 
   return (
     <div
@@ -30,6 +36,7 @@ const ChatWrapper = ({
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         setInput={setInput}
+        isAnswering={isLoading}
       />
     </div>
   );
