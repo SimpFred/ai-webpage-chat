@@ -1,6 +1,6 @@
-import ChatWrapper from "../components/chatWrapper";
-import { ragChat } from "../../lib/rag-chat";
-import { redis } from "../../lib/redis";
+import ChatWrapper from "../../components/chatWrapper";
+import { ragChat } from "../../../lib/rag-chat";
+import { redis } from "../../../lib/redis";
 import { cookies } from "next/headers";
 
 interface PageProps {
@@ -56,7 +56,11 @@ const Page = async ({ params }: PageProps) => {
   }
 
   return (
-    <ChatWrapper sessionId={sessionId} initialMessages={initialMessages} />
+    <ChatWrapper
+      apiURL={"/api/chat-stream"}
+      sessionId={sessionId}
+      initialMessages={initialMessages}
+    />
   );
 };
 export default Page;
