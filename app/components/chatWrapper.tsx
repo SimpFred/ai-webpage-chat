@@ -6,9 +6,11 @@ import { ChatInput } from "./chatInput";
 const ChatWrapper = ({
   sessionId,
   initialMessages,
+  apiURL,
 }: {
   sessionId: string;
   initialMessages: Message[];
+  apiURL: string;
 }) => {
   const {
     messages,
@@ -18,7 +20,7 @@ const ChatWrapper = ({
     setInput,
     isLoading,
   } = useChat({
-    api: "/api/chat-stream",
+    api: apiURL,
     body: { sessionId },
     initialMessages,
   });
