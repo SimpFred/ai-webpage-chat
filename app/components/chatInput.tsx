@@ -28,9 +28,10 @@ export const ChatInput = ({
       <div className="mx-2 flex flex-row gap-3 md:mx-4 md:last:mb-6 lg:mx-auto lg:max-w-2xl xl:max-w-3xl">
         <div className="relative flex h-full flex-1 items-stretch md:flex-col">
           <div className="relative flex flex-col w-full flex-grow p-4">
-            <form onSubmit={handleSubmit} className="relative">
+            <form onSubmit={handleSubmit} className="relative w-[60%] mx-auto">
               <Textarea
                 minRows={4}
+                variant="faded"
                 autoFocus
                 disabled={isAnswering}
                 onChange={handleInputChange}
@@ -47,7 +48,7 @@ export const ChatInput = ({
                     ? "Generating response..."
                     : "Enter your question..."
                 }
-                className="resize-none bg-zinc-800 rounded-xl text-base caret-slate-50"
+                className="resize-none bg-zinc-800 hover:bg-zinc-800 dark:text-white rounded-xl text-base caret-slate-50"
               />
               <Button
                 size="sm"
