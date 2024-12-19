@@ -1,4 +1,4 @@
-import { ollama, RAGChat, upstash } from "@upstash/rag-chat";
+import { RAGChat, upstash } from "@upstash/rag-chat";
 import { redis } from "./redis";
 
 export const ragChat = new RAGChat({
