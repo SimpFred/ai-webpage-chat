@@ -1,11 +1,4 @@
-import { Button } from "@nextui-org/react";
-import {
-  AppWindowIcon,
-  BotMessageSquare,
-  LayoutTemplate,
-  MessageSquare,
-  MessageSquareCode,
-} from "lucide-react";
+import { AppWindowIcon, BotMessageSquare, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
