@@ -20,7 +20,7 @@ export const Messages = ({ messages }: MessagesProps) => {
   }, [messages]);
 
   return (
-    <div className="flex max-h-[calc(100vh-3.5rem-7rem)] flex-1 flex-col overflow-y-scroll">
+    <div className="flex max-h-[calc(100vh-3.5rem-7rem)] flex-1 flex-col overflow-y-scroll scrool-smooth">
       {messages.length ? (
         messages.map((message, index) => (
           <Message
