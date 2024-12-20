@@ -1,4 +1,5 @@
 import ChatWrapper from "@/app/components/chatWrapper";
+import Menu from "@/app/components/menu";
 import { ragChat } from "@/lib/rag-chat";
 import { cookies } from "next/headers";
 
@@ -12,10 +13,13 @@ export default async function Chat() {
   });
 
   return (
-    <ChatWrapper
-      apiURL={"/api/llm-stream"}
-      sessionId={sessionId}
-      initialMessages={initialMessages}
-    />
+    <div className="grid grid-cols-[auto,1fr] h-screen">
+      <Menu />
+      <ChatWrapper
+        apiURL={"/api/llm-stream"}
+        sessionId={sessionId}
+        initialMessages={initialMessages}
+      />
+    </div>
   );
 }
