@@ -81,7 +81,7 @@ const Page = async ({ params }: PageProps) => {
 
   return (
     <ChatWrapper
-      apiURL={"/api/chat-stream"}
+      apiURL={"/api/web-page-chat-stream"}
       sessionId={sessionId}
       initialMessages={initialMessages}
     />

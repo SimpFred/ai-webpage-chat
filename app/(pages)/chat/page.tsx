@@ -16,7 +16,7 @@ export default async function Chat() {
     <div className="grid grid-cols-[auto,1fr] h-screen">
       <Menu />
       <ChatWrapper
-        apiURL={"/api/llm-stream"}
+        apiURL={"/api/chat-stream"}
         sessionId={sessionId}
         initialMessages={initialMessages}
       />
