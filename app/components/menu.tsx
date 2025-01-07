@@ -5,8 +5,6 @@ import SessionListItem from "./sessionListItem";
 const Menu = async () => {
   const sessions = await redis.hgetall("chat_sessions");
 
-  console.log("Sessions:", sessions);
-
   // Omvandla sessions till en array och sortera efter lastModified
   const sortedSessions = sessions
     ? Object.entries(sessions)
