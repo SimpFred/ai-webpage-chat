@@ -16,6 +16,32 @@ function reconstructUrl({ url }: { url: string[] }) {
   return decodedComponents.join("/");
 }
 
+const generateAndSaveNamespace = async (
+  recounstructedUrl: string,
+  sessionId: string
+) => {
+  const namespaceResponse = await ragChat.chat(
+    `Based on this url, please come up with a suitable unique namespace for this URL. It needs to be specific to only this URL. Only return the namespace and nothing else, not even '"'. URL: "${recounstructedUrl}"`,
+    {
+      sessionId,
+      disableRAG: true,
+    }
+  );
+
+  const namespace = namespaceResponse.output.trim();
+  const namespaceKey = recounstructedUrl.replace(/\//g, "");
+  await redis.hset("chat_namespace", {
+    [namespaceKey]: JSON.stringify({
+      namespace,
+    }),
+  });
+
+  // Radera alla nuvarande meddelanden i sessionen (namespace frågan och svaret) för att inte spara den i chat historiken
+  ragChat.history.deleteMessages({ sessionId });
+
+  return namespace;
+};
+
 const Page = async ({ params }: PageProps) => {
   const sessionCookie = (await cookies()).get("sessionId")?.value;
   const { url } = await params;
@@ -36,23 +62,21 @@ const Page = async ({ params }: PageProps) => {
   });
 
   console.log("isAlreadyIndexed", isAlreadyIndexed);
-  async function addUrlsInBatches(urls: string[], batchSize: number) {
-    for (let i = 0; i < urls.length; i += batchSize) {
-      const batch = urls.slice(i, i + batchSize);
-      await redis.sadd("indexed-urls", ...(batch as [string, ...string[]]));
-    }
-  }
 
   if (isAlreadyIndexed === 0) {
+    const namespace = await generateAndSaveNamespace(
+      recounstructedUrl,
+      sessionId
+    );
+
     await ragChat.context.add({
       type: "html",
       source: recounstructedUrl,
-      config: { chunkOverlap: 50, chunkSize: 200 },
+      config: { chunkOverlap: 250, chunkSize: 500 },
+      options: { namespace: namespace },
     });
 
-    const urlsToAdd = [recounstructedUrl]; // Lägg till fler URL:er om det behövs
-    const batchSize = 1000; // Max batchstorlek
-    await addUrlsInBatches(urlsToAdd, batchSize);
+    await redis.sadd("indexed-urls", recounstructedUrl);
   }
 
   return (
