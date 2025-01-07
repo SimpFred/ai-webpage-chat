@@ -12,9 +12,6 @@ const NewChat = () => {
       await fetch("/api/new-session", { method: "POST" });
 
       window.location.reload();
-
-      // Om du vill, uppdatera UI eller logga resultatet
-      console.log("New session created!");
     } catch (error) {
       console.error("Error creating new session:", error);
     }
