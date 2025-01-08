@@ -1,6 +1,8 @@
 import { Bot, User } from "lucide-react";
 import { cn } from "../../lib/utils";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface MessageProps {
   content: string;
@@ -37,8 +39,39 @@ export const Message = ({ content, isUserMessage }: MessageProps) => {
                 {isUserMessage ? "You" : "Website"}
               </span>
             </div>
-            <div className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-              <ReactMarkdown>{content}</ReactMarkdown>
+            <div className="text-base font-normal py-4 px-6 text-gray-900 dark:text-white leading-relaxed">
+              <ReactMarkdown
+                components={{
+                  code({
+                    inline,
+                    className,
+                    children,
+                    ...props
+                  }: {
+                    inline?: boolean;
+                    className?: string;
+                    children?: React.ReactNode;
+                  }) {
+                    const match = /language-(\w+)/.exec(className || "");
+                    return !inline && match ? (
+                      <SyntaxHighlighter
+                        style={materialDark}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {String(children).replace(/\n$/, "")}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code className={className} {...props}>
+                        {children}
+                      </code>
+                    );
+                  },
+                }}
+              >
+                {content}
+              </ReactMarkdown>
             </div>
           </div>
         </div>
