@@ -10,10 +10,10 @@ export const POST = async (req: NextRequest) => {
   try {
     const { messages, sessionId } = await req.json();
     const lastMessage = messages[messages.length - 1].content;
-    const [encodedUrl] = sessionId.split("--");
+    const [nameSpaceKey] = sessionId.split("--");
     const namespace: NamespaceData | null = await redis.hget(
       "chat_namespace",
-      encodedUrl
+      nameSpaceKey
     );
 
     const response = await ragChat.chat(lastMessage, {
