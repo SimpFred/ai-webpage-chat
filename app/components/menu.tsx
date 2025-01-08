@@ -1,6 +1,5 @@
 import { redis } from "@/lib/redis"; // Anpassa sökvägen efter din struktur
-import NewChat from "./newChat";
-import SessionListItem from "./sessionListItem";
+import DraggableMenu from "./draggableMenu";
 
 const Menu = async () => {
   const sessions = await redis.hgetall("chat_sessions");
@@ -21,22 +20,7 @@ const Menu = async () => {
         .sort((a, b) => b.lastModified - a.lastModified)
     : [];
 
-  return (
-    <div className="h-full z-index-1 w-[200px] bg-zinc-900 text-white p-4">
-      <NewChat />
-
-      <ul className="mt-8">
-        {sessions &&
-          sortedSessions.map(({ sessionId, title }) => (
-            <SessionListItem
-              key={sessionId}
-              sessionId={sessionId}
-              title={title as string}
-            />
-          ))}
-      </ul>
-    </div>
-  );
+  return <DraggableMenu sessions={sortedSessions} />;
 };
 
 export default Menu;
