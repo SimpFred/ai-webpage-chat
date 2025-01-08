@@ -1,4 +1,9 @@
-import { AppWindowIcon, BotMessageSquare, MessageSquare } from "lucide-react";
+import {
+  AppWindowIcon,
+  BotMessageSquare,
+  FileText,
+  MessageSquare,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -29,6 +34,16 @@ export default function Home() {
                 <MessageSquare size={30} className="m-1 text-white" />
               </div>
               <p className="text-xs text-white">Vanlig LLM chat</p>
+            </Link>
+            <Link
+              href="/upload-file"
+              className="flex-1 mt-6 z-10 bg-gradient-to-r from-pink-500 to-blue-500 flex flex-col rounded-lg p-2 items-center justify-center hover:shadow-lg hover:from-pink-600 hover:to-blue-600 transition-all duration-300"
+            >
+              <div className="flex">
+                <FileText size={30} className="m-1 text-white" />
+                <MessageSquare size={30} className="m-1 text-white" />
+              </div>
+              <p className="text-xs text-white">Chatta med ett pdf dokument</p>
             </Link>
           </div>
         </div>
