@@ -42,6 +42,13 @@ export const Message = ({ content, isUserMessage }: MessageProps) => {
             <div className="text-base font-normal py-4 px-6 text-gray-900 dark:text-white leading-relaxed">
               <ReactMarkdown
                 components={{
+                  ul: ({ ...props }) => (
+                    <ul className="list-disc ml-6" {...props} />
+                  ),
+                  ol: ({ ...props }) => (
+                    <ol className="list-decimal ml-6" {...props} />
+                  ),
+                  li: ({ ...props }) => <li className="mb-1" {...props} />,
                   code({
                     inline,
                     className,
@@ -54,14 +61,25 @@ export const Message = ({ content, isUserMessage }: MessageProps) => {
                   }) {
                     const match = /language-(\w+)/.exec(className || "");
                     return !inline && match ? (
-                      <SyntaxHighlighter
-                        style={materialDark}
-                        language={match[1]}
-                        PreTag="div"
-                        {...props}
-                      >
-                        {String(children).replace(/\n$/, "")}
-                      </SyntaxHighlighter>
+                      <>
+                        <div className="text-m bg-neutral-900 rounded-t-md mt-3 p-2">
+                          {match[1]}
+                        </div>
+
+                        <SyntaxHighlighter
+                          style={materialDark}
+                          customStyle={{
+                            marginTop: "0",
+                            borderBottomLeftRadius: ".375rem",
+                            borderBottomRightRadius: ".375rem",
+                          }}
+                          language={match[1]}
+                          PreTag="div"
+                          {...props}
+                        >
+                          {String(children).replace(/\n$/, "")}
+                        </SyntaxHighlighter>
+                      </>
                     ) : (
                       <code className={className} {...props}>
                         {children}
