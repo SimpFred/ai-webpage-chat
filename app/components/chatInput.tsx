@@ -48,7 +48,7 @@ export const ChatInput = ({
                     ? "Generating response..."
                     : "Enter your question..."
                 }
-                className="resize-none bg-zinc-800 hover:bg-zinc-800 dark:text-white rounded-xl text-base caret-slate-50"
+                className="resize-none bg-zinc-800 hover:bg-zinc-800 text-white rounded-xl text-base caret-slate-50"
               />
               <Button
                 size="sm"
