@@ -4,9 +4,9 @@ import { cookies } from "next/headers";
 import ChatWrapper from "../../components/chatWrapper";
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     file: string;
-  };
+  }>;
 }
 
 const generateAndSaveNamespace = async (
@@ -41,6 +41,7 @@ const generateAndSaveNamespace = async (
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PdfChat = async ({ searchParams }: PageProps) => {
   try {
     const params = await searchParams;

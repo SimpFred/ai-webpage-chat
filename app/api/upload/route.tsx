@@ -11,7 +11,7 @@ export const config = {
   },
 };
 
-export async function POST(req: Request) {
+export async function POST(req: Request): Promise<Response> {
   // Kontrollera att uppladdningsmappen finns
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     );
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise<Response>((resolve, reject) => {
     const bb = busboy({ headers });
 
     let filePath = "";
@@ -73,5 +73,5 @@ export async function POST(req: Request) {
           )
         );
       });
-  });
+  }).then((response) => response); // Se till att promise returnerar ett Response-objekt
 }

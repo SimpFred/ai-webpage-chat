@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    // appDir: true, // Aktiverar stöd för app-mappen
+    typedRoutes: true, // Om du använder TypeScript och dynamiska routes
+  },
 };
 
 export default nextConfig;

@@ -4,9 +4,9 @@ import { redis } from "../../../lib/redis";
 import { cookies } from "next/headers";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     url: string | string[] | undefined;
-  };
+  }>;
 }
 
 function reconstructUrl({ url }: { url: string[] }) {
@@ -47,6 +47,7 @@ const generateAndSaveNamespace = async (
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Page = async ({ params }: PageProps) => {
   try {
     const sessionCookie = (await cookies()).get("sessionId")?.value;
