@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className=" flex flex-col h-full dark:bg-zinc-900 dark:text-zinc-200 items-center justify-center">
+      <div className=" flex flex-col h-full bg-zinc-900 text-zinc-200 items-center justify-center">
         <div className="text-center bg-white dark:bg-zinc-900 p-8 ">
           <h1 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
             Välkommen till detta <br /> LLM Interface! 🤖
