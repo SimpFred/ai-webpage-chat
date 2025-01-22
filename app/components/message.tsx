@@ -35,11 +35,11 @@ export const Message = ({ content, isUserMessage }: MessageProps) => {
           </div>
           <div className="flex flex-col ml-6 w-full">
             <div className="flex items-center space-x-2">
-              <span className="text-sm font-semibold text-gray-900 dark:text-white">
+              <span className="text-sm font-semibold text-gray-900 text-white">
                 {isUserMessage ? "You" : "Website"}
               </span>
             </div>
-            <div className="text-base font-normal py-4 px-6 text-gray-900 dark:text-white leading-relaxed">
+            <div className="text-base font-normal py-4 px-6 text-gray-900 text-white leading-relaxed">
               <ReactMarkdown
                 components={{
                   ul: ({ ...props }) => (

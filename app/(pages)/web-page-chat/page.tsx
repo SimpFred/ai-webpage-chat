@@ -1,7 +1,7 @@
 const WebPageChat = () => {
   return (
-    <div className="p-20 flex flex-col h-full dark:bg-zinc-900 dark:text-zinc-200 items-center justify-center">
-      <div className="text-center bg-white dark:bg-zinc-900">
+    <div className="p-20 flex flex-col h-full bg-zinc-900 text-zinc-200 items-center justify-center">
+      <div className="text-center bg-white bg-zinc-900">
         <p className="mb-4 text-lg">
           För att börja chatta med en hemsida, sätt den URL du vill chatta med
           direkt efter URL:en{" "}
